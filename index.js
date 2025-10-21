@@ -9,7 +9,7 @@ module.exports = async function (context, req) {
     const tempConfigPath = path.join(os.tmpdir(), `chart_${Date.now()}.json`);
     fs.writeFileSync(tempConfigPath, JSON.stringify(config));
 
-    const scriptPath = path.join(__dirname, "fusionexport", "run.bat");
+    const scriptPath = path.join(__dirname, "fusionexport-csharp-win_x64-v2.0.0", "run.bat");
 
     const output = await new Promise((resolve, reject) => {
       execFile(scriptPath, [tempConfigPath], { windowsHide: true }, (error, stdout, stderr) => {
