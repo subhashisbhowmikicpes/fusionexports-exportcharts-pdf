@@ -31,7 +31,7 @@ module.exports = async function (context, req) {
     fs.writeFileSync(tempConfigPath, JSON.stringify(config));
     console.log("📄 Chart config written to:", tempConfigPath);
 
-    const scriptPath = path.join(__dirname, "fusionexport-csharp-win_x64-v2.0.0", "run.bat");
+    const scriptPath = path.resolve(__dirname, "..", "fusionexport-csharp-win_x64-v2.0.0", "run.bat");
     console.log("🚀 Running batch script:", scriptPath);
 
     const output = await new Promise((resolve, reject) => {
