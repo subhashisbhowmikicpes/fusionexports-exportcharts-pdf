@@ -21,13 +21,14 @@ jobs:
     - name: Install Azure Functions Core Tools
       run: npm install -g azure-functions-core-tools@4 --unsafe-perm true
 
-    - name: Publish to Azure Function App
-      run: func azure functionapp publish ${{ secrets.AZURE_FUNCTIONAPP_NAME }}
-      env:
-        AZURE_FUNCTIONAPP_NAME: ${{ secrets.AZURE_FUNCTIONAPP_NAME }}
-        AZURE_FUNCTIONAPP_PACKAGE_PATH: '.'
-        AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
 
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Azure Function App
+      uses: azure/functions-action@v1
+      with:
+        app-name: ${{ secrets.AZURE_FUNCTIONAPP_NAME }}
+        package: '.'
