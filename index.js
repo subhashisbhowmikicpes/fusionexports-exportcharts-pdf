@@ -27,6 +27,7 @@ module.exports = async function (context, req) {
 
     const config = req.body;
     const tempConfigPath = path.join(os.tmpdir(), `chart_${Date.now()}.json`);
+    console.log("📝 Writing chart config to temp file:", tempConfigPath);
     fs.writeFileSync(tempConfigPath, JSON.stringify(config));
     console.log("📄 Chart config written to:", tempConfigPath);
 
